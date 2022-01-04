@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./JavaScript CSS模板.css">
+    <script src="./plug-in/jQuery/jQuery 3.6.0.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- jquery API中文文档网址
+    https://jquery.cuishifeng.cn/index.html  -->
+
+    <!-- javascript库，即library，是一个封装好的特定的集合（方法和函数），简单理解就是一个JS文件，里面对我们原生JS进行了封装
+    存放在里面，这样我们可以快速高效的使用这些封装好的功能了
+    jQuery的概念
+    jQuery是一个快速简洁的javascript库，其设计的宗旨是'write less,do more'，即倡导写更少的代码，做更多的事
+    j就是javascript，Query查询；意思就是查询js，把js中的DOM操作做了封装，我们可以快速的查询使用里面的功能
+    jQuery封装了JS常用的功能代码，优化了DOM操作、事件处理、动画设计和Ajax交互
+    jQuery的优点
+    1.轻量级，核心文件才几十kb，不会影响页面加载速度
+    2.跨浏览器兼容，基本兼容了现在主流的浏览器
+    3.链式编程、隐式迭代
+    4.对事件、样式、动画支持，大大简化了DOM操作
+    5.支持插件扩展开发，有着丰富的第三方插件，例如：树形菜单，日期控件，轮播图等等
+    6.免费，开源 -->
+
+    <!-- jQuery入口函数
+    $(function(){       
+                      此处是页面DOM加载完成的入口，类似于DOMContentLoaded事件
+    })
+    效果等同，但是上面的更为方便，更推荐
+    $(document).ready(function(){
+                      此处是页面DOM加载完成的入口，类似于DOMContentLoaded事件
+    }) -->
+    <!-- <div></div>
+    <script>
+        $(function(){
+            $('div').hide();   //隐藏元素
+        })
+    </script> -->
+
+    <!-- jQuery顶级对象$
+    1.$是jQuery的别称，在代码中可以使用jQuery代替$,但一般为了方便，通常直接使用$
+    2.$是jQuery的顶级对象，相当于原生JS中的window，把元素利用$包装成jQuery对象，就可以调用jQuery的方法
+    $(function(){
+        $('div').hide();   //隐藏元素
+    })
+    上面的代码也可以写成
+    jQuery(function(){
+        jQuery('div').hide();
+    })
+    但是$更为方便，开发中最为推荐 -->
+
+    <!-- DOM对象和jQuery对象
+    1.DOM对象 用原生JS获取过来的对象就是DOM对象
+    比如 var div = document.querySelector('div'),这个div就是DOM对象
+    2.jQuery对象 用jQuery的方式获取过来的对象就是jQuery对象，通过$把DOM元素进行了包装
+    $('div');      $('div')就是一个jQuery对象
+    3.jQuery对象只能使用jQuery方法，DOM对象则只能使用原生js的方法和属性 -->
+
+    <!-- DOM对象和jQuery对象相互转换
+    因为原生JS比jQuery更大，原生的一些属性和方法jQuery没有给我们封装，要想使用这些属性和方法需要把
+    jQuery对象转换成DOM对象才能使用 -->
+    <!-- <video src="xxx.mp4"></video>
+    <script>
+        $('video')  //jQuery对象获取视频
+        var myvideo = document.querySelector('video')       //DOM对象获取视频
+        假如想要播放这个视频原生JS方法是myvideo.play(),但是jQuery里没有play这个方法
+        所以不能 $('video').play() ,这个时候我们就要将jQuery对象转换成DOM对象
+        DOM对象转换成jQuery对象：$(DOM对象)
+        $(myvideo)        //myvideo就是上面DOM获取的对象，转换的时候里面就不需要加引号了
+        jQuery对象转换成DOM对象（两种方式）
+        第一种方式：$('video')[索引号]        //因为jQuery对象是以伪数组的形式存储的， $('video')[0].play()这样就可以使用play方法了
+        第二种方式：$('video').get(索引号)    //所以这里$('video').get(0).play()也可以使用play方法
+    </script> -->
+
+    <!-- jQuery基础选择器
+    jQuery获取元素的方法jQuery('选择器') 里面选择器直接写CSS选择器即可，但是要加引号
+    例:jQuery('#div') id选择器
+    jQuery('.div') 类选择器
+    jQuery('div') 标签选择器
+    jQuery('div,span,ul') 并集选择器，选取多个元素
+    jQuery('ul li')  后代选择器
+    等等所有CSS里的选择器都可以用来在jQuery里获取元素 -->
+
+    <!-- 隐式迭代
+    遍历内部DOM元素（伪数组形式存储）的过程就叫做隐式迭代
+    简单理解就是jQuery会隐式的对匹配到的所有元素进行循环遍历，执行相应的方法，而不用我们再循环进行操作，简化了我们的操作 -->
+    <!-- <div>1111</div>
+    <div>2222</div>
+    <div>3333</div>
+    <div>4444</div>
+    <script>
+        $(function () {
+            $('div').css('background', 'red')             //所以这里只用写一个，就能让上面所有div改变样式，因为内部已经循环遍历了
+            $('div').css('border', '1px solid black')     //所有div，并且让每个div都执行了相应的方法，不需要再循环去添加样式了
+        })
+    </script> -->
+
+    <!-- jQuery筛选选择器
+    :first     获取第一个元素
+    :last        获取最后一个元素
+    :eq(索引号)  获取指定索引号所对应的元素
+    :odd        获取所有索引号是奇数的元素
+    :even       获取所有索引号是偶数的元素 -->
+    <!-- <ul>
+        <li>ul1</li>
+        <li>ul2</li>
+        <li>ul3</li>
+        <li>ul4</li>
+        <li>ul5</li>
+        <li>ul6</li>
+        <li>ul7</li>
+        <li>ul8</li>
+    </ul>
+    <ol>
+        <li>ol1</li>
+        <li>ol2</li>
+        <li>ol3</li>
+        <li>ol4</li>
+        <li>ol5</li>
+        <li>ol6</li>
+    </ol>
+    <script>
+        $(function(){
+            $('ul li:first').css('background','red')   //设置ul里的第一个li为红色
+            $('ul li:last').css('background','yellow')  //设置ul里的最后一个li为黄色
+            $('ul li:eq(5)').css('background','blue')  //设置ul里索引号为5的li，也就是第6个li为蓝色
+            $('ol li:odd').css('background','green')   //设置了ol里所有索引号为奇数的元素为绿色，奇数从索引号1开始，也就是从第2个li开始
+            $('ol li:even').css('background','aqua')  //设置了ol里所有索引号为偶数的元素为水蓝色，偶数从索引号0开始，也就是从第1个li开始
+        })
+    </script> -->
+
+    <!-- jQuery筛选方法
+    parent()         查找父级
+    children(选择器)  父级下最近一级的（亲儿子）
+    find(选择器)     相当后代选择器 父级下所有的  -->
+
+    <!-- 选取父子元素 -->
+    <!-- <div class="grandfather">爷爷
+        <div class="father">爸爸
+            <div class="son">儿子</div>
+        </div>
+    </div>
+    <div class="grandmother">奶奶
+        <div class="mother">妈妈</div>
+        <div class="uncle">叔叔
+            <p class="cousin">堂弟</p>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('.son').parent().css('background', 'red')
+            console.log($('.son').parent());
+            $('.grandmother').children('div').css('color','blue')
+            console.log($('.grandmother').children('div'));
+            $('.grandmother').find('div').css('color','pink')
+            console.log($('.grandmother').find('div'));
+        })
+    </script> -->
+
+    <!-- 下拉菜单jQuery写法 -->
+    <!-- <ul class="box">
+        <li class="lili">微博
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">微信
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">公众号
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">小程序
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>                                       //jQuery里show()显示   hide()隐藏   $(this)指向绑定事件的元素
+        $(function () {
+            $('.box > .lili').mouseover(function () {    //给ul下的所有亲儿子li设置鼠标移入绑定事件，让他们下面的
+                $(this).children('ul').show()            //孩子ul设置为显示，由于隐式迭代的原因不需要给每个元素循环绑定事件了
+            })
+            $('.box > .lili').mouseout(function () {    //同理设置设置鼠标离开事件显示为隐藏
+                $(this).children('ul').hide()
+            })
+
+        })
+    </script> -->
+
+    <!-- jQuery筛选方法
+    siblings(选择器)  查找兄弟节点不包括自身
+    nextAll([表达式])  查找当前元素之后的所有同辈元素
+    prevAll([表达式])  查找当前元素之前的所有同辈元素
+    hasClass(class)   检查当前的元素是否含有某个特定的类，如果有，返回true -->
+    <!-- <ul>
+        <li>1</li>
+        <li>2</li>
+        <li class="lis">3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <ol>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ol>
+    <script>
+        $(function(){
+            $('ul .lis').siblings('li').css('background','red')  //兄弟选择器，给ul下的除了第三个之外的所有li设置样式
+            $('ol li').eq(3).nextAll().css('background','blue')  //除去ol里索引号为3的li之外后面所有的兄弟元素改变样式
+            $('ol li').eq(3).prevAll().css('background','green')  //除去ol里索引号为3的li之外前面所有的兄弟元素改变样式
+            console.log($('ul li:eq(2)').hasClass('lis'))  //判断指定的元素是否有指定的类名，如果有返回true,没有则false
+        })
+    </script> -->
+
+    <!-- jQuery排他思想 -->
+    <!-- <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <script>
+        $(function(){
+            $('button').click(function(){              //因为隐式迭代，给所有的button绑定了点击事件
+                $(this).css('background','#999')       //给当前点击的元素设置样式
+                $(this).siblings().css('background','')   //给当前点击的元素的所有兄弟元素样式清空
+            })
+        })
+    </script> -->
+
+    <!-- jQuery点击导航显示相对应的图片 -->
+    <!-- <div class="box">
+        <ul class="menulist">
+            <a href="javascript:;">
+                <li>图片1</li>
+            </a>
+            <a href="javascript:;">
+                <li>图片2</li>
+            </a>
+            <a href="javascript:;">
+                <li>图片3</li>
+            </a>
+            <a href="javascript:;">
+                <li>图片4</li>
+            </a>
+        </ul>
+        <div class="imglist">
+            <img src="../Rotation chart1_mobile.jpg" alt="">
+            <img src="../Rotation chart2_mobile.jpg" alt="">
+            <img src="../Rotation chart3_mobile.jpg" alt="">
+            <img src="../Rotation chart4_mobile.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('.menulist a').click(function () {
+                var index = $(this).index();            //$(this).index()获取当前点击的元素索引号
+                $(this).css('background', '#999')       //改变当前被点击元素的样式
+                $(this).siblings().css('background', '')     //让除了被点击元素之外的所有兄弟元素样式清空
+                $('.imglist img').eq(index).show()          //用被点击元素的索引号放入eq()中来相对应的显示图片
+                $('.imglist img').eq(index).siblings().hide()   //除了显示图片之外的兄弟图片全部隐藏
+            })
+        })
+    </script> -->
+
+    <!-- jQuery链式编程 省去多余的代码
+    $(this).css('background', '#999') 
+    $(this).siblings().css('background', '')
+    上面的代码可以写成 
+    $(this).css('background', '#999').siblings().css('background', '')
+    省去了多余$(this)的操作，因为都是同一个对象 相当于我的背景颜色为#999，并且我的兄弟的背景颜色为空
+    $('.imglist img').eq(index).show()
+    $('.imglist img').eq(index).siblings().hide()
+    同理上面的也可以写成
+    $('.imglist img').eq(index).show().siblings().hide() -->
+
+    <!-- 操作CSS的方法 -->
+    <!-- <div>jQuery样式操作</div>
+    <script>
+        $(function(){
+           console.log($('div').css('color'));   //如果里面参数只写属性名，则返回属性值，这里因为css模板里设置了红色，所以返回红色
+           console.log($('div').css('fontSize'));  //返回css模板里的文字大小
+           $('div').css('fontSize','20px')   //修改样式，直接替换原有的样式，属性名要遵循驼峰命名法，属性值如果是数字可以不加引号直接写20
+           $('div').css({                    //设置多个样式，用对象的形式css({})，里面加大括号，属性名要加引号，逗号隔开
+               'width': 100,
+               'height': 100,
+               'backgroundColor': 'green',
+               'font-size': 2,
+               'line-height': '100px'
+           })
+        })
+    </script> -->
+
+    <!-- 设置类样式方法，作用类似于classList -->
+    <!-- <button>按钮</button>
+    <div></div>
+    <script>
+        $(function(){
+            $('button').click(function(){
+                $('div').addClass('current')             //添加current的类名
+                $('div').removeClass('current')         //删除current的类名
+                $('div').toggleClass('current')         //没有则添加，有则删除
+            })
+        })
+    </script> -->
+    <!-- tab栏切换案例 jQuery方法 -->
+    <!-- <div class="box">
+        <ul class="content_list">
+            <li class="current">商品介绍</li>
+            <li>规格与包装</li>
+            <li>售后保障</li>
+            <li>商品评价</li>
+            <li>手机社区</li>
+            <li></li>
+        </ul>
+        <div class="content_body">
+            <div style="display: block;">商品介绍内容区</div>
+            <div>规格与包装内容区</div>
+            <div>售后保障内容区</div>
+            <div>商品评价内容区</div>
+            <div>手机社区内容区</div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('.content_list li').click(function () {
+                $(this).addClass('current').siblings().removeClass('current')
+                var index = $(this).index()
+                $('.content_body div').eq(index).show().siblings().hide()
+            })
+        })
+    </script> -->
+
+    <!-- jQuery类操作和className区别
+    原生JS里className会覆盖原先里面的类名
+    jQuery里的类操作只是对指定类进行操作，比如添加类名等等，不会影响原先的类名 -->
+
+    <!-- jQuery显示与隐藏效果
+    show()和hide()里面分别跟三个参数
+    show([speed,[easing],[fn]])
+    speed 三种预定速度之一的字符串("slow","normal", or "fast")或表示动画时长的毫秒数值(如：1000)
+    easing (Optional) 用来指定切换效果，默认是"swing"，可用参数"linear"
+    fn 在动画完成时执行的函数，每个元素执行一次。 -->
+    <!-- <button>显示</button>
+    <button>隐藏</button>
+    <button>切换</button>
+    <div></div>
+    <script>
+        $(function () {
+            $('button').eq(0).click(function () {
+                $('div').show(5000, "linear", function () {    //点击显示按钮显示div并设定为5秒动画匀速显示，显示完成后执行
+                    $('div').css('background', 'red')           //回调函数让背景色变成红色
+                })
+            })
+            $('button').eq(1).click(function () {              //点击隐藏按钮隐藏div并设定为2秒的动画隐藏效果
+                $('div').hide(2000)
+            })
+            $('button').eq(2).click(function () {             //点击切换按钮可重复点击显示与隐藏div
+                $('div').toggle(2000)             
+            })
+        })
+    </script> -->
+
+    <!-- jQuery上下滑动效果、事件切换和停止动画排列stop() -->
+    <!-- <ul class="box">
+        <li class="lili">微博
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">微信
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">公众号
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+        <li class="lili">小程序
+            <ul class="lis">
+                <li>内容1</li>
+                <li>内容2</li>
+                <li>内容3</li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        $(function(){
+            // 上下滑动效果
+            //slideDown()向下滑动和slideUp()向上滑动，里面参数和show,hide一样，但是动画效果是上下滑动
+            // $('.box .lili').mouseover(function(){
+            //     $(this).children('.lis').slideDown(500)
+            // })
+            // $('.box .lili').mouseout(function(){
+            //     $(this).children('.lis').slideUp()
+            // })
+            
+            //  事件切换
+            //  hover([over,]out)中括号里over代表可省略，参数里面跟鼠标移入事件和鼠标离开事件，相当与mouseenter和mouseleave
+            // $('.box .lili').hover(function(){
+            //     $(this).children('.lis').slideDown(500)
+            // },function(){
+            //     $(this).children('.lis').slideUp()
+            // })                                             
+
+            // slideToggle()的事件切换 
+            // 如果hover里跟一个参数，那么鼠标经过和鼠标离开都会触发这个函数，所以这里只需一个slideToggle()就可以
+            // 完成鼠标移入和鼠标移出的效果，大大降低了代码量就可以完成上面两种方法的效果
+            // $('.box .lili').hover(function(){
+            //     $(this).children('.lis').slideToggle(500)
+            // })
+
+            // 动画队列及其停止排队方法
+            // 动画效果一旦触发就会执行，如果多次触发，就会造成多个动画或者效果排队执行，所以上面的代码是有bug的，短时间内多次触发
+            // 会造成动画排队执行的问题,所以这里要用到停止排队的方法stop()，用于停止动画或效果
+            // 注意：stop()要写到动画或者效果的前面，相当于停止结束上一次的动画，写在后面会造成当前动画停止执行
+            $('.box .lili').hover(function(){
+                $(this).children('.lis').stop().slideToggle(500)
+            })
+        })
+    </script> -->
+
+    <!-- jQuery淡入淡出效果
+    fadeIn() 淡入
+    fadeOut() 淡出
+    fadeToggle() 切换淡入和淡出 
+    上面三种里面参数依旧和show,hide相同
+    fadeTo() 渐进方式调整到指定的不透明度，参数为([speed,opacity,[easing],[fn])，除了往常的三种参数外增加了opacity的参数
+    opacity透明度必须要写，取值为0 - 1之间 -->
+    <!-- <button>淡入</button>
+    <button>淡出</button>
+    <button>切换</button>
+    <button>自定义修改</button>
+    <div></div>
+    <script>
+        $(function(){
+            // $('button').eq(0).click(function(){     //淡入显示动画
+            //     $('div').fadeIn(2000)             
+            // })
+            // $('button').eq(1).click(function(){     //淡出显示动画
+            //     $('div').fadeOut(2000)
+            // })
+            // $('button').eq(2).click(function(){        //切换淡出淡出显示动画
+            //     $('div').fadeToggle(2000)
+            // })
+            // $('button').eq(3).click(function(){       //渐进为透明度0.5
+            //     $('div').fadeTo(2000,0.5)
+            // })
+        })
+    </script> -->
+
+    <!-- 突出显示案例 -->
+    <!-- <ul class="box">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        $(function () {
+            $('.box li').hover(function () {       //鼠标移入让某个图片颜色变淡，其它兄弟颜色还原，还原将透明度改回1即可
+                $(this).stop().fadeTo(300, 0.3).siblings().stop().fadeTo(300, 1) //记住要在每个动画前面加上stop()，防止动画队列
+            })
+        })
+    </script> -->
+
+    <!-- 自定义动画animate(params,[speed,[easing],[fn])
+    params想要更改的样式属性，以对象形式传递，必须写。属性名可以不带引号，如果是复合属性则需要采取驼峰命名法命名，其余参数可省略
+    只有数字值可创建动画，字符串值无法创建动画，比如backgroundColor:red等等，数字值的前面可以使用+=或者-=来创建相对动画 -->
+    <!-- <button>点击动画</button>
+    <div>动画</div>
+    <script>
+        $(function(){
+            $('button').click(function(){
+                $('div').animate({
+                    left: '+=30',     //+=可以循环动画，每次点击都会执行
+                    bottom: 300,          //所有属性值都必须为数字且必须要设置定位，字符串型无法创建动画
+                    borderRadius: 20,
+                    width: 400,
+                    height: 400
+                },1000,function(){
+                    $('div').css('background','black')       //回调函数里可以增加想要的样式
+                })
+            })
+        })
+    </script> -->
+
+    <!-- 手风琴案例 -->
+    <!-- <ul class="box">
+        <li><a href="javascript:;">
+                <img src="../1.jpeg" alt="" class="littleimg">
+                <img src="../Rotation chart1_mobile.jpg" alt="" class="bigimg">
+            </a></li>
+        <li><a href="javascript:;">
+                <img src="../Rotation chart2_mobile.jpg" alt="" class="bigimg">
+                <img src="../2.jpeg" alt="" class="littleimg">
+            </a></li>
+        <li><a href="javascript:;">
+                <img src="../Rotation chart3_mobile.jpg" alt="" class="bigimg">
+                <img src="../33.jpg" alt="" class="littleimg">
+            </a>
+        </li>
+        <li><a href="javascript:;">
+                <img src="../Rotation chart4_mobile.jpg" alt="" class="bigimg">
+                <img src="../phone.jpg" alt="" class="littleimg">
+            </a></li>
+    </ul>
+    <script>
+        $(function () {       //注意：每个动画前要加上stop()，停止动画排队的问题
+            $('.box > li').mouseenter(function () {         //让当前鼠标移入的li
+                $(this).stop().animate({                  //盒子宽度变大
+                    width: 170                     //利用find()找到孙子元素里的小图片，让其淡出，再让小图片的兄弟元素大图片淡入
+                }).find('.littleimg').stop().fadeOut(500).siblings('.bigimg').stop().fadeIn()
+                $(this).siblings('li').stop().animate({         //最后让当前鼠标移入的li的其它兄弟li宽度变小，同样利用find()找到孙子元素
+                    width: 60                                   //里的大图片使其淡出，兄弟元素的小图片淡入即可
+                }).find('.bigimg').stop().fadeOut().siblings('.littleimg').stop().fadeIn()
+            })
+        })
+    </script> -->
+
+    <!-- jQuery获取属性操作 -->
+    <!-- <a href="www.baidu.com">百度</a>
+    <input type='checkbox' checked> -->
+    <!--复选框默认设置为选中状态-->
+    <!-- <div index='1'>我是div</div>
+    <span>我是span</span>
+    <ul data-index="456">我是ul</ul> -->
+    <!-- <script>
+        // prop('属性名')可以获取元素自带属性的属性值，比如a自带的href，input自带的type属性，但是不能获取自定义属性
+        // prop('属性名','属性值')可以修改元素自带属性的属性值
+        $(function () {
+            console.log($('a').prop('href'));       //返回的是a标签里href的属性值www.baidu.com
+            $('a').prop('href', 'https://www.jd.com')  //将a的href属性值修改为了https://www.jd.com
+            console.log($('a').prop('href'));        //返回https://www.jd.com
+            console.log($('input').prop('checked'));  //默认复选框是选中状态的，这里返回的是true
+            $('input').prop('checked', false)    //将复选框checked属性值修改为了false，所以现在复选框默认变成了非选中状态
+            $('input').change(function () {       //给input设置一个change事件，通过点击来查看checked属性的返回值
+                console.log($('input').prop('checked')); //选中返回ture,取消选中返回false
+            })
+            console.log($('div').prop('index'));  //返回undefined，因为index是自定义属性无法获取
+            // 获取自定义属性
+            // attr('属性名')和prop一样获取属性值，但是可以获取自定义属性的值
+            // attr('属性名','属性值') 修改属性值方法也相同，同样也可以修改自定义属性的值
+            console.log($('div').attr('index')); //index是div的自定义属性，返回1
+            $('div').attr('index', '2')        //将index自定义属性值改为2
+            console.log($('div').attr('index'));  //返回
+            console.log($('a').attr('href')); //同样也可以获取自带属性的值，返回https://www.jd.com，但是自带属性更推荐用prop()
+            // 数据缓存data()
+            // data()方法可以在指定的元素上存取数据，并不会修改DOM元素结构，一旦刷新页面，之前存放的数据都将被移除
+            $('span').data('spanValue', '123')       //data()只是把span当做一个变量，自定义一个属性名和属性值，将值存放在span元素内存里
+            console.log($('span').data('spanValue'));  //并不会修改span的属性，获取值的方法和prop，attr相同
+            console.log($('ul').data('index')); //ul自定义了一个data开头的属性data-index="456"，获取这个值可以省略掉前面的data-开头
+        })                                      //并且返回的是数字型
+    </script> -->
+
+    <!-- 购物车全选案例 -->
+    <!-- <div>
+        <input type="checkbox"><span>全选</span><br>
+        <input type="checkbox"><br>
+        <input type="checkbox"><br>
+        <input type="checkbox">
+    </div>
+    <script>
+        $(function () {
+            $('input').eq(0).change(function () {          //给全选框添加change事件来查看是否为选中状态
+                var index = $(this).prop('checked')        //定义一个变量index为全选框的选中状态，选中为true,未选中为false
+                $(this).siblings('input').prop('checked', index)  //让全选框之外的所有复选框的checked属性值为index，这样全选如果选中
+            })                                                   //则所有复选框也会跟随选中，反之亦然
+            $('input').eq(0).siblings('input').change(function () {   //给所有复选框添加change事件来查看是否为选中状态
+                var index = $('input').eq(0).siblings('input').length;  //定义一个变量获取复选框的个数
+                if ($('input').eq(0).siblings('input:checked').length === index) {  //:checked用来查看被选中的复选框的个数，如果这个个数
+                    $('input').eq(0).prop('checked', true)          //等于所有复选框的个数，即代表所有复选框被选中，那么就让全选框也选中
+                } else {
+                    $('input').eq(0).prop('checked', false)       //反之就让全选框处于未选中
+                }
+            })
+        })
+    </script> -->
+    <!-- jQuery内容和文本值的操作 -->
+    <!-- <div>
+        <span>文本内容</span>
+    </div>
+    <input type="text" value="请输入内容">
+    <script>
+        $(function () {
+            console.log($('div').html())  //html()返回的是div里的内容，相当于原生的innerHTML,包含标签，所以返回'<span>文本内容</span>'
+            console.log($('div').text())  //text()只返回文本内容，相当于原生的innerText不包含标签，所以返回'文本内容'
+            $('div').html('html修改后的内容')   //修改div里的内容
+            console.log($('div').html())  //这里直接返回'html修改后的内容'，连同span标签一起修改
+            $('div').text('text修改后的内容')  //text()只修改文字内容
+            console.log($('div').text())   //返回'text修改后的内容'
+            console.log($('input').val()) //val()获取表单值，相当于原生的value
+            $('input').val('val修改后的表单值')  //同样可以修改表单的值
+            console.log($('input').val())  //返回'val修改后的表单值'
+        })
+    </script> -->
+
+    <!-- 购物车商品增减数量 -->
+    <!-- <div class="box">
+        <span>单价: </span><span class="unit-price" style="display:inline-block;">12.65</span>
+        <a href="javascript:;" class="minus">-
+        </a>
+        <input type="text" value="1">
+        <a href="javascript:;" class="plus">+
+        </a>
+        <span>合计: </span><span class="total" style="display:inline-block;">12.5</span>
+    </div>
+    <script>
+        $(function () {
+            $('.minus').click(function () {          //给减号添加点击事件
+                var num = $('input').val()         //定义变量值为当前文本框的值
+                num--;                            //因为点击后依次减1，所以执行减减
+                if (num >= 0) {                  //由于商品数量不能小于0，所以判断大于等于0
+                    $('input').val(num)          //再执行让当前文本框的值等于减减之后的值
+                } else {                          //否则不执行操作
+                    return false
+                }
+                var price = $('.unit-price').html() * $('input').val()  //总价等于单价乘以文本框的值（商品数量），将这个值给一个变量
+                price = price.toFixed(2)                             //toFixed()，保留小数位，参数写几代表保留几位小数  
+                $('.total').html(price)                             //让总价显示为这个值
+            })
+            $('.plus').click(function () {      //加号同理
+                var num = $('input').val()
+                num++;
+                $('input').val(num)
+                var price = $('.unit-price').html() * $('input').val() //获取总价方法和上面减号事件相同
+                price = price.toFixed(2)
+                $('.total').html(price)
+            })
+            $('input').change(function () {                           //当用户输入商品数量时计算总价，先用change事件来查看表单内数量的变化
+                var ipt = $(this).val() * $('.unit-price').html()  //用当前输入的数量乘以单价
+                ipt = ipt.toFixed(2)                             //保留2位小数
+                $('.total').html(ipt)                            //赋值给总价
+            })
+        })
+    </script> -->
+
+    <!-- jQuery遍历对象each方法 -->
+    <!-- <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <script>
+        $(function () {
+            var str = ['red', 'yellow', 'green', 'blue', 'aqua']
+            var sum = 0;
+            var obj = {
+                name: '王二',
+                age: 18,
+                sex: '男'
+            }
+            $('div').each(function (i, domEle) {          //i是索引号，domEle是DOM元素，each会遍历所有div的索引号和dom元素
+                $(domEle).css('color', str[i])         //因为是dom元素所以要转换成jQuery，有了索引号这里给每个div添加不同的颜色
+                sum += parseInt($(domEle).text())    //让每个div里的数字相加，注意这里返回的是字符型，要转换成数字型                   
+            })
+            console.log(sum); //输出总和
+            // jQuery遍历数据$.each方法 
+            $.each($('div'), function (i, ele) {       //返回数据和上面each等同
+                console.log(i);                       
+                console.log(ele);
+            })
+            $.each(str, function (i, ele) {      //遍历数组，i是数组长度的索引号，ele是数组内的元素
+                console.log(i);
+                console.log(ele);
+            })
+            $.each(obj, function (i, ele) {     //遍历对象 ，i是对象的属性名，ele是对象的属性值
+                console.log(i);
+                console.log(ele);
+            })
+        })
+        // 总结：遍历DOM元素标签用each方法更合适，而遍历数组和对象用$.each方法更适合
+    </script> -->
+
+    <!-- jQuery的创建、添加和删除元素 -->
+    <!-- <div>我是div</div>
+    <ul>我是ul
+        <li>我是li</li>
+    </ul>
+    <span class="sp">我是span</span>
+    <script>
+        $(function () {
+            var li = $('<li>我是添加在后面的的li</li>')     //创建元素直接在里面$()里面写想要标签即可
+            var lis = $('<li>我是添加在前面的li</li>')
+            $('ul').append(li)                  //添加append()将创建的元素添加在指定元素内部的最后面，父子关系   
+            $('ul').prepend(lis)               //添加prepend() 将创建的元素添加在指定元素内部的最前面，父子关系 
+            var span = $('<span>我是添加在span前面的<span>')
+            var spans = $('<span>我是添加在span后面的<span>')
+            $('.sp').before(span)              //before()将创建的元素添加在指定元素的前面， 兄弟关系
+            $('.sp').after(spans)             //before()将创建的元素添加在指定元素的后面， 兄弟关系
+            $('div').remove()                //remove()直接删除指定元素
+            $('ul').empty()                  //empty()删除指定元素里的所有子节点，不包含自身，而是删除里面所有内容
+            $('.sp').html('')                //html('')注意括号里要加引号才是删除，和empty()效果等同删除内部所有子节点不包含自身
+        })
+    </script> -->
+
+    <!-- jQuery尺寸的操作 -->
+    <!-- <div>
+    </div>
+    假设div的css样式设置为：
+    width: 400px;
+    height: 500px;
+    padding: 20px;
+    margin: 30px;
+    border: 5px solid red; -->
+    <!-- <script>                                
+        $(function(){
+           console.log( $('div').width());  //width()只得到的是div元素的宽度400px
+           console.log( $('div').height()); //height()只得到的是div元素的高度500px
+           console.log( $('div').innerWidth());  //innerWidth()得到的是包含padding的元素的宽度，左右padding各20px，也就是440px
+           console.log($('div').outerWidth());  //outerWidth()得到的是包含padding、border的元素宽度，border左右各5px，所以是450px
+           console.log($('div').outerWidth(true));  //outerWidth(true)参数带上true得到的是包含padding、border和margin的元素宽度，margin左右各30px，所以是460px
+        })
+    </script> -->
+
+    <!-- jQuery位置的操作 -->
+    <!-- <div class="box">
+        <div class="box1"></div>
+    </div>
+    <script>
+        $(function(){
+            console.log($('.box1').offset());  //offset()以对象的形式返回的是元素距离文档左侧和顶部的距离，和所有定位元素无关
+            console.log($('.box1').offset().left)  //由于offset()返回的是对象的形式，所以要返回某个指定位置的距离需要自己添加
+            $('.box1').offset({           //offset()可以自己修改元素的位置，以对象的形式进行修改
+                top:300,
+                left:300
+            })
+            console.log($('.box1').position());  //position()以对象的形式返回的是元素距离它父级开启定位元素的距离
+            console.log($('.box1').position().left);  //和offset()一样由于是对象的形式，返回指定位置的距离也是需要自己添加
+        })                                     //注意：position()并不能像offset()那样去修改元素的位置
+    </script> -->
+
+    <!-- jQuery被卷去头部方法和带有动画的返回顶部 -->
+    <!-- <div class="box"></div>
+    <div class="top">返回顶部</div>
+    <script>
+        $(function(){
+            $(document).scrollTop(200)             //文档的scrollTop()里面跟参数，页面每次刷新都会在参数的位置 
+            var boxTop = $('.box').offset().top;     //定义一个变量，得到盒子顶部到文档顶部的距离
+            $(window).scroll(function(){            //给window对象设置一个滚动事件
+                if($(document).scrollTop() >= boxTop){     //如果文档向下滚动的距离大于了盒子到顶部的距离
+                    $('.top').stop().slideDown(500)      //就让返回顶部的盒子显示出来
+                }else{
+                    $('.top').stop().slideUp(200)        //否则就隐藏起来
+                }
+            })
+            $('.top').click(function(){           //给返回顶部盒子设置点击事件
+                $('html').stop().animate({       //给返回顶部设置动画效果，使用animate动画函数，它里面有一个scrollTop属性
+                    scrollTop:0                 //但是animate必须是给元素做动画，不能是文档
+                },1000)
+            })
+        })
+    </script> -->
+
+    <!-- 电梯导航案例 -->
+    <!-- <div class="flexbox">
+        <ul class="list">
+            <li>模块1</li>
+            <li>模块2</li>
+            <li>模块3</li>
+            <li>模块4</li>
+        </ul>
+    </div>
+    <ul class="box">
+        <li>展示区1</li>
+        <li>展示区2</li>
+        <li>展示区3</li>
+        <li>展示区4</li>
+    </ul>
+    <ul class="boxright">
+        <li class="current_boxright">展示区1</li>
+        <li>展示区2</li>
+        <li>展示区3</li>
+        <li>展示区4</li>
+    </ul>
+    <script>
+        $(function () {
+            $(window).scroll(function () {
+                if ($(document).scrollTop() >= $('.box li').eq(1).offset().top) {
+                    $('.flexbox').stop().slideDown(200)
+                } else {
+                    $('.flexbox').stop().slideUp(200)
+                }
+                $('.boxright li').each(function (i, domEle) {
+                    if ($(document).scrollTop() >= $('.box li').eq(i).offset().top) {
+                        $(domEle).addClass('current_boxright').siblings('li').removeClass('current_boxright')
+                    }
+                })
+            })
+            $('.list li').click(function () {
+                var index = $(this).index()
+                var distance = $('.box li').eq(index).offset().top
+                $('html').stop().animate({
+                    scrollTop: distance
+                })
+                $(this).addClass('current_box').siblings().removeClass('current_box')
+            })
+        })
+    </script> -->
+
+    <!-- 事件处理on绑定多个元素和实现事件委派 -->
+    <!-- on('事件','要触发的元素','事件函数') -->
+    <!-- <ul>
+    </ul>
+    <div>
+    </div>
+    <ol>
+        <li>点击第一个li</li>
+        <li>点击第二个li</li>
+        <li>点击第三个li</li>
+        <li>点击第四个li</li>
+    </ol>
+    <script>
+        $(function () {
+            $('ul').on({                      //可以以对象的形式同时设置多个事件和事件函数
+                mouseenter: function () {
+                    $(this).css('background', 'red')
+                },
+                click: function () {
+                    $(this).stop().animate({
+                        opacity: 0
+                    }, 3000)
+                },
+                mouseleave: function () {
+                    $(this).stop().animate({
+                        opacity: 1
+                    }, 3000)
+                }
+            })
+            $('div').on('mouseenter click mouseleave', function () {    //可以直接设置多个事件，空格隔开，添加的所有事件都会触发后面的事件函数
+                $(this).toggleClass('current')
+            })
+            $('ol').on('click', 'li', function () {            //可以事件委派的操作，将原来给子元素触发的事件绑定在父级元素上，就是把事件委派给父元素
+                alert('事件委托第' + ($(this).index() + 1) + '个li')
+            })
+        })
+        // on还可以给动态创建的元素绑定事件，比如事件委托里的子元素，后面如果再添加其它的子元素on依旧会触发添加后的子元素
+    </script> -->
+
+    <!-- 微博发布留言案例 -->
+    <!-- <div>
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <button>发布</button>
+    </div>
+    <script>
+        $(function () {
+            $('button').on('click', function () {
+                var textval = $('textarea').val()     //定义变量为文本域里的值
+                var p = $('<p>' + textval + '<a href="javascript:;">删除</a>' + '</p>') //创建p标签和a标签的删除功能，同时将文本域的内容放进p里面
+                if ($('textarea').val() !== '') {     //先判断文本域内容不能为空，如果为空则不执行下面操作
+                    $('div').append(p)            //将创建的所有标签和内容添加到div里
+                    $('p').slideDown()           //以动画下滑的形式显示留言的内容
+                    $('textarea').val('')        //发布完成后让文本域内容为空
+                } else {                           //如果内容为空点发布则弹出警告内容不能为空
+                    alert('内容不能为空！')
+                }
+            })
+            $('div').on('click', 'a', function () {           //用on才能给动态创建的元素绑定事件，所以这里要用on来进行事件处理
+                $(this).parent().stop().slideUp(function () {  //当点击a标签的删除之后让当前a的父亲p以动画上滑的形式隐藏起来，然后执行动画里面的
+                    $(this).remove()                          //回调函数(必须要等动画执行完才可以执行删除)，也就是当动画执行完之后让当前的p删除
+                })                                             //回调函数里的$(this)指向的是$(this).parent()，所以里面不能再加parent()
+            })
+        })
+    </script> -->
+
+    <!-- off()解绑事件 -->
+    <!-- <div></div>
+    <ul>
+        <li>我是li</li>
+        <li>我是li</li>
+        <li>我是li</li>
+    </ul>
+    <nav></nav>
+    <script>
+        $(function () {
+            $('div').on({                                 //给div用on设置3个事件
+                mouseenter: function () {
+                    $(this).css('background', 'red')
+                },
+                click: function () {
+                    $(this).css('background', 'blue')
+                },
+                mouseleave: function () {
+                    $(this).css('background', 'yellow')
+                },
+            })
+            $('div').off('click')                          //off()里参数为事件类型，如果不跟参数，则解绑所有事件，参数写事件类型则只解绑指定事件  
+            $('ul').on('click', 'li', function () {            //给ul添加事件委托，里面所有li点击显示弹出
+                console.log('弹出');
+            })
+            $('ul').off('click', 'li')               //给ul解绑事件委托
+            $('nav').one({                          //one()事件处理和on()作用一样，但是它只会执行一次里面的事件
+                mouseenter: function () {
+                    $(this).fadeOut(3000)
+                },
+                mouseleave: function () {
+                    $(this).fadeIn(3000)
+                },
+            })
+        }) -->
+
+    <!-- jQuery自动触发事件 -->
+    <!-- <input type="text">
+    <div>我是div</div>
+    <script>
+        $(function () {                         //先给div绑定一个鼠标移入的事件
+            $('div').on('mouseenter', function () {
+                console.log('自动触发');
+            })                                //三种自动触发事件的方法：
+            // $('div').mouseenter()            //第一种:元素.事件类型()  不跟参数直接在元素后面加上绑定后的事件类型即可自动触发事件  
+            // $('div').trigger('mouseenter')     //第二种:元素.trigger('事件类型')  和上面作用一样可以自动触发事件
+            $('input').on('focus', function () {    //每当刷新页面都会自动先触发一次上面的事件
+                $(this).val('请输入内容')
+            })
+            $('input').triggerHandler('focus')  //第三种:元素.triggerHandler('事件类型')  同样可以自动触发事件，但是不会触发元素的默认行为
+        })                                      //这里input的默认行为是获得焦点后有光标闪烁
+    </script> -->
+
+    <!-- jQuery事件对象 阻止冒泡和默认行为 -->
+    <!-- <a href="https://www.jd.com/">京东</a>
+    <script>
+        $(function () {
+            $(document).on('click', function (e) { //给文档设置一个点击事件
+                console.log('文档弹出');
+            })
+            $('a').on('click', function (e) {
+                console.log('跳转');
+                e.stopPropagation()          //e.stopPropagation()阻止冒泡  阻止了a的冒泡行为，点击只会弹出跳转，不会弹出上面文档的点击事件
+                e.preventDefault()          //e.preventDefault()阻止默认行为 这里阻止了a标签的默认行为，所以点击后并不会去跳转到指定网站上
+            })
+        })
+    </script> -->
+
+    <!-- jQuery对象拷贝$.extend() 深拷贝和浅拷贝解析-->
+    <!-- <script>
+        // $.extend([deep],target,obj1,[objn])
+        // deep:默认不写为false浅拷贝，写上true为深拷贝
+        // target:要拷贝的目标对象
+        // obj1:等待拷贝的对象
+        // objn:等待拷贝的第n个对象
+        // 浅拷贝是把被拷贝对象里复杂数据类型中的地址拷贝给目标对象，修改目标对象会影响被拷贝对象
+        // 深拷贝是完全克隆（直接拷贝对象，而不是地址），修改目标对象不会影响被拷贝对象
+        $(function () {
+            var obj_a = {                     //浅拷贝:$.extend(obj_a,obj_b)，将obj_b拷贝到obj_a里面，如果有相同的属性
+                name: '王二',                 //则覆盖原先的属性值，这里除了id是合并，其余都是覆盖原先的属性值
+                sex: '男',                    //所以拷贝之后重新打印obj_a为age: 20 fn: {a: 20} id: 10086 name: "赵三" sex: "女"，同名覆盖，不同名合并
+                age: 19,                      //简单数据类型直接将属性名和值拷贝进去，而复杂数据类型，这里fn是个对象的复杂数据类型，它是先开辟一个新的空间和地址
+                fn: {                        //将fn这个对象放到这个新的空间里，而拷贝给obj_a的是这个空间的地址，假如这个地址是0x11100，那么拷贝进去的就是
+                    a: 10,                  //fn:0x11100这个地址，让fn指向这个地址来得到这个对象，所以现在如果修改obj_a里面的fn的a的值obj_a.fn.a = 50
+                    b: 30                  //那么obj_a里的a和obj_b里的a的值都会发生变化变成50，因为它们俩指向的是同一个地址里存的对象，修改谁都会影响另一个
+                }                         //浅拷贝obj_a.fn里面b:30的值会直接被obj_b.fn覆盖掉，所以只保留a的值
+            }
+            var obj_b = {                  //深拷贝:$.extend(true,obj_a, obj_b)，前面加true，是将obj_b完整的拷贝到obj_a里，简单数据类型同名属性名依旧会
+                name: '赵三',             //覆盖掉原先的，但是复杂数据类型是直接将对象克隆过去，而不是地址，这里obj_b的fn直接复制给了obj_a的fn，不会覆盖
+                sex: '女',               //所有的值，而是将里面的同名a的值覆盖掉，b则保留下来，所以克隆后obj_a里的fn的值就为a:20,b:30，这个时候如果我再修改
+                age: 20,                //obj_a的值obj_a.fn.a = 50，则obj_a里的a会变成50，但是obj_b里的a还是20，因为深拷贝后的obj_a里的fn会另开辟一个新的
+                id: 10086,             //空间和地址，这个时候obj_a指向的是这个新的地址，而不是原来的地址，所有修改数值不会影响到原先的地址里的值
+                fn: {
+                    a: 20
+                }
+            }
+            $.extend(true, obj_a, obj_b)       //深拷贝
+            obj_a.fn.a = 50
+            console.log(obj_a);
+            console.log(obj_b);
+            // $.extend(obj_a, obj_b)        //浅拷贝
+            // obj_a.fn.a = 50
+            // console.log(obj_a);
+            // console.log(obj_b);
+        })
+    </script> -->
+
+    <!-- Query多库共存j
+    jQuery使用$作为标识符，但是其它js库也有可能会用到$作为标识符，这样一起使用会引起冲突 -->
+    <!-- <div></div>
+    <span></span>
+    <script>
+        $(function(){
+            function $(ele){                                //自己封装$符
+                return document.querySelector(ele)
+            }
+            // 解决方案：
+            // 1.如果$出现冲突，我们就使用jQuery
+            console.log(jQuery('div'));
+            // 2.利用noConflict()让jQuery释放对$的控制权，自己来决定
+            var jq = jQuery.noConflict();       //将$符改成任意标识符
+            console.log(jq('span'));          //此标识符和$作用相同
+        })
+    </script> -->
+
+    <!-- jQuery插件常用的网址：
+    http://www.htmleaf.com/ 
+    https://www.jq22.com/ 
+    https://www.dowebok.com/-->
+
+</body>
+
+</html>
