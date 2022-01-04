@@ -4,3 +4,5 @@ test git txt master add
 test git txt masterChild add
 版本2 master 添加
 masterChild分支
+版本2 自定义添加
+masterChild分支 masterChild 添加
