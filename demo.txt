@@ -1,6 +1,6 @@
 test git txt
 test git txt
-test git txt
-test git txt
-版本2
+test git txt master add
+test git txt masterChild add
+版本2 master 添加
 masterChild分支
